@@ -1,45 +1,29 @@
 import { Link } from "react-router-dom";
-import { Calculator } from "lucide-react";
+import { Flame } from "lucide-react";
 
 const Footer = () => (
-  <footer className="border-t bg-card">
-    <div className="container mx-auto px-4 py-10">
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <Link to="/" className="flex items-center gap-2 font-heading text-lg font-bold">
-            <Calculator className="h-5 w-5 text-primary" />
-            Uber Earnings Calculator
-          </Link>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Free tools to help gig drivers track earnings, expenses, and maximize profit.
-          </p>
+  <footer className="border-t border-border px-4 py-8">
+    <div className="container mx-auto max-w-5xl">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-2">
+          <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary">
+            <Flame className="h-3 w-3 text-primary-foreground" />
+          </div>
+          <span className="font-heading text-sm font-bold text-foreground">
+            Money<span className="text-primary">Flow</span>
+          </span>
         </div>
-        <div>
-          <h4 className="font-heading text-sm font-semibold">Calculators</h4>
-          <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-            <li><Link to="/uber-earnings-calculator" className="hover:text-primary">Uber Calculator</Link></li>
-            <li><Link to="/lyft-earnings-calculator" className="hover:text-primary">Lyft Calculator</Link></li>
-            <li><Link to="/doordash-earnings-calculator" className="hover:text-primary">DoorDash Calculator</Link></li>
-            <li><Link to="/delivery-driver-calculator" className="hover:text-primary">Delivery Calculator</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-heading text-sm font-semibold">Resources</h4>
-          <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-            <li><Link to="/blog" className="hover:text-primary">Blog</Link></li>
-            <li><Link to="/blog/is-uber-worth-it-canada-2026" className="hover:text-primary">Is Uber Worth It?</Link></li>
-            <li><Link to="/blog/uber-vs-doordash" className="hover:text-primary">Uber vs DoorDash</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-heading text-sm font-semibold">Locations</h4>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Serving drivers in Calgary, Toronto, Vancouver, New York, California, and Texas.
-          </p>
-        </div>
-      </div>
-      <div className="mt-8 border-t pt-6 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Uber Earnings Calculator. All rights reserved. Not affiliated with Uber, Lyft, or DoorDash.
+
+        <nav className="flex flex-wrap justify-center gap-4 text-xs text-muted-foreground">
+          <Link to="/uber-earnings-calculator" className="hover:text-foreground transition-colors">Uber Calculator</Link>
+          <Link to="/lyft-earnings-calculator" className="hover:text-foreground transition-colors">Lyft Calculator</Link>
+          <Link to="/doordash-earnings-calculator" className="hover:text-foreground transition-colors">DoorDash Calculator</Link>
+          <Link to="/blog" className="hover:text-foreground transition-colors">Blog</Link>
+        </nav>
+
+        <p className="text-xs text-muted-foreground">
+          © {new Date().getFullYear()} MoneyFlow. All rights reserved.
+        </p>
       </div>
     </div>
   </footer>

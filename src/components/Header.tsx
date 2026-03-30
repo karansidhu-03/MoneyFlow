@@ -1,50 +1,81 @@
-import { Link } from "react-router-dom";
-import { Calculator, Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Flame, Menu, X } from "lucide-react";
 import { useState } from "react";
+
+const navItems = [
+  { to: "/", label: "Dashboard" },
+  { to: "/uber-earnings-calculator", label: "Uber" },
+  { to: "/lyft-earnings-calculator", label: "Lyft" },
+  { to: "/doordash-earnings-calculator", label: "DoorDash" },
+  { to: "/blog", label: "Blog" },
+];
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-card/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 glass border-b border-border">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
-        <Link to="/" className="flex items-center gap-2 font-heading text-lg font-bold text-foreground">
-          <Calculator className="h-6 w-6 text-primary" />
-          <span>Uber Earnings Calculator</span>
+        <Link to="/" className="flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+            <Flame className="h-4 w-4 text-primary-foreground" />
+          </div>
+          <span className="font-heading text-lg font-bold text-foreground">
+            Money<span className="text-primary">Flow</span>
+          </span>
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
-          <NavItem to="/uber-earnings-calculator" label="Uber" />
-          <NavItem to="/lyft-earnings-calculator" label="Lyft" />
-          <NavItem to="/doordash-earnings-calculator" label="DoorDash" />
-          <NavItem to="/delivery-driver-calculator" label="Delivery" />
-          <NavItem to="/blog" label="Blog" />
+        <nav className="hidden md:flex items-center gap-1">
+          {navItems.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                pathname === item.to
+                  ? "text-primary bg-primary/10"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
 
-        <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Toggle menu">
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        <button
+          className="md:hidden p-2 text-muted-foreground"
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle menu"
+        >
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
       {open && (
-        <nav className="border-t bg-card px-4 py-4 md:hidden">
-          <div className="flex flex-col gap-3">
-            <NavItem to="/uber-earnings-calculator" label="Uber Calculator" onClick={() => setOpen(false)} />
-            <NavItem to="/lyft-earnings-calculator" label="Lyft Calculator" onClick={() => setOpen(false)} />
-            <NavItem to="/doordash-earnings-calculator" label="DoorDash Calculator" onClick={() => setOpen(false)} />
-            <NavItem to="/delivery-driver-calculator" label="Delivery Calculator" onClick={() => setOpen(false)} />
-            <NavItem to="/blog" label="Blog" onClick={() => setOpen(false)} />
-          </div>
-        </nav>
+        <motion.nav
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="md:hidden glass border-t border-border px-4 pb-4"
+        >
+          {navItems.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              onClick={() => setOpen(false)}
+              className={`block px-3 py-2.5 rounded-md text-sm font-medium ${
+                pathname === item.to
+                  ? "text-primary bg-primary/10"
+                  : "text-muted-foreground"
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </motion.nav>
       )}
     </header>
   );
 };
-
-const NavItem = ({ to, label, onClick }: { to: string; label: string; onClick?: () => void }) => (
-  <Link to={to} onClick={onClick} className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
-    {label}
-  </Link>
-);
 
 export default Header;

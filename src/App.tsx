@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index";
+import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import UberEarningsCalculator from "./pages/UberEarningsCalculator";
 import LyftEarningsCalculator from "./pages/LyftEarningsCalculator";
@@ -23,7 +23,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/uber-earnings-calculator" element={<UberEarningsCalculator />} />
           <Route path="/lyft-earnings-calculator" element={<LyftEarningsCalculator />} />
           <Route path="/doordash-earnings-calculator" element={<DoorDashEarningsCalculator />} />
