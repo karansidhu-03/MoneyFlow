@@ -92,6 +92,7 @@ export function computeMetrics(state: FinancialState): FinancialMetrics {
   return {
     totalAnnualIncome,
     totalMonthlyIncome,
+    monthlyExpenses: state.monthlyExpenses,
     monthlyNetProfit,
     annualNetProfit,
     safeToSpendDaily,
