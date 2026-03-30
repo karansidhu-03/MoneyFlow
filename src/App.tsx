@@ -29,6 +29,7 @@ const AppRoutes = () => {
   return (
     <Routes location={location} key={location.pathname}>
       <Route path="/" element={<PageWrapper><Dashboard /></PageWrapper>} />
+      <Route path="/mortgage-calculator" element={<PageWrapper><MortgageCalculator /></PageWrapper>} />
       <Route path="/uber-earnings-calculator" element={<PageWrapper><UberEarningsCalculator /></PageWrapper>} />
       <Route path="/lyft-earnings-calculator" element={<PageWrapper><LyftEarningsCalculator /></PageWrapper>} />
       <Route path="/doordash-earnings-calculator" element={<PageWrapper><DoorDashEarningsCalculator /></PageWrapper>} />
