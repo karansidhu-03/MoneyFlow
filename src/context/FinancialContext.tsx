@@ -19,6 +19,7 @@ export interface FinancialState {
 export interface FinancialMetrics {
   totalAnnualIncome: number;
   totalMonthlyIncome: number;
+  monthlyExpenses: number;
   monthlyNetProfit: number;
   annualNetProfit: number;
   safeToSpendDaily: number;
