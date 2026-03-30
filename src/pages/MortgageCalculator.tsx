@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AdUnit from "@/components/AdUnit";
 
 const MortgageCalculator = () => {
   const [homePrice, setHomePrice] = useState(500000);
@@ -92,32 +93,42 @@ const MortgageCalculator = () => {
               </div>
 
               {/* Qualification Checker */}
-              <div className={`p-6 rounded-2xl border-2 transition-all duration-500 ${
-                qualification.isQualified ? "border-emerald-500 bg-emerald-50/30" : "border-amber-500 bg-amber-50/30"
-              }`}>
-                <h3 className="font-heading text-lg font-bold text-slate-800 flex items-center gap-2">
-                  <div className={`w-3 h-3 rounded-full ${qualification.isQualified ? "bg-emerald-500 animate-pulse" : "bg-amber-500"}`} />
-                  Qualification Check
-                </h3>
-                <div className="space-y-4 mt-6">
-                  <MortgageInput label="Annual Gross Income" icon={<DollarSign size={16}/>} value={annualIncome} onChange={setAnnualIncome} step={1000} max={250000} />
-                  <MortgageInput label="Monthly Debts" icon={<TrendingDown size={16}/>} value={monthlyDebts} onChange={setMonthlyDebts} step={50} max={5000} />
-                  
-                  <div className="bg-white/60 rounded-xl p-4 mt-4 shadow-sm">
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-sm font-medium text-slate-600">Debt-to-Income (GDS):</span>
-                      <span className={`font-bold ${qualification.gds < 39 ? "text-emerald-600" : "text-rose-600"}`}>
-                        {qualification.gds.toFixed(1)}%
-                      </span>
+                 <div className={`p-6 rounded-2xl border-2 transition-all duration-500 ${
+                      qualification.isQualified ? "border-emerald-500 bg-emerald-50/30" : "border-amber-500 bg-amber-50/30"
+                    }`}>
+                      <h3 className="font-heading text-lg font-bold text-slate-800 flex items-center gap-2">
+                        <div className={`w-3 h-3 rounded-full ${qualification.isQualified ? "bg-emerald-500 animate-pulse" : "bg-amber-500"}`} />
+                        Qualification Check
+                      </h3>
+                      
+                      <div className="space-y-4 mt-6">
+                        <MortgageInput label="Annual Gross Income" icon={<DollarSign size={16}/>} value={annualIncome} onChange={setAnnualIncome} step={1000} max={250000} />
+                        <MortgageInput label="Monthly Debts" icon={<TrendingDown size={16}/>} value={monthlyDebts} onChange={setMonthlyDebts} step={50} max={5000} />
+                        
+                        {/* Results Box */}
+                        <div className="bg-white/60 rounded-xl p-4 mt-4 shadow-sm">
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="text-sm font-medium text-slate-600">Debt-to-Income (GDS):</span>
+                            <span className={`font-bold ${qualification.gds < 39 ? "text-emerald-600" : "text-rose-600"}`}>
+                              {qualification.gds.toFixed(1)}%
+                            </span>
+                          </div>
+                          <p className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Bank Limit: 39%</p>
+                        </div>
+                    
+                        {/* Clean Ad Placement */}
+                        <div className="pt-4 flex flex-col items-center">
+                          <span className="text-[10px] text-slate-400 uppercase font-bold mb-2">Advertisement</span>
+                          <AdUnit id="b224111807f976ca4d615af57f2621c7" height={250} width={300} />
+                        </div>
+                    
+                        <p className="text-sm text-slate-600 mt-4 italic text-center">
+                          {qualification.isQualified 
+                            ? "✅ You're in the green zone for most Canadian lenders!" 
+                            : "⚠️ This mortgage might be tough to get with your current income."}
+                        </p>
+                      </div>
                     </div>
-                    <p className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Bank Limit: 39%</p>
-                    <p className="text-sm text-slate-600 mt-4 italic">
-                      {qualification.isQualified 
-                        ? "✅ You're in the green zone for most Canadian lenders!" 
-                        : "⚠️ This mortgage might be tough to get with your current income."}
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
 
