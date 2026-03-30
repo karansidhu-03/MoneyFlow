@@ -13,6 +13,7 @@ import Blog from "./pages/Blog";
 import BlogUberWorthIt from "./pages/BlogUberWorthIt";
 import BlogUberCalgary from "./pages/BlogUberCalgary";
 import BlogUberVsDoordash from "./pages/BlogUberVsDoordash";
+import MortgageCalculator from "./pages/MortgageCalculator";
 
 const queryClient = new QueryClient();
 
