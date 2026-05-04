@@ -15,7 +15,7 @@ import BlogUberCalgary from "./pages/BlogUberCalgary";
 import BlogUberVsDoordash from "./pages/BlogUberVsDoordash";
 import MortgageCalculator from "./pages/MortgageCalculator";
 const SHOW_ADS = !window.location.hostname.includes("vercel.app");
-
+import { AdsProvider } from "@/context/ads-context";
 const queryClient = new QueryClient();
 
 // Senior Dev Tip: This wrapper ensures every page enters the screen with a "playful" fade-up
@@ -53,15 +53,17 @@ const AppRoutes = () => {
 };
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <AdsProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </AdsProvider>
 );
 
 export default App;
