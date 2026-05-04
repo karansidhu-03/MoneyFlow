@@ -14,6 +14,7 @@ import BlogUberWorthIt from "./pages/BlogUberWorthIt";
 import BlogUberCalgary from "./pages/BlogUberCalgary";
 import BlogUberVsDoordash from "./pages/BlogUberVsDoordash";
 import MortgageCalculator from "./pages/MortgageCalculator";
+const SHOW_ADS = !window.location.hostname.includes("vercel.app");
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,13 @@ const queryClient = new QueryClient();
 const PageWrapper = ({ children }: { children: React.ReactNode }) => (
   <div className="fade-in-up min-h-screen bg-background">
     {children}
+
+    {/* ✅ Global bottom ad (only if ads enabled) */}
+    {SHOW_ADS && (
+      <div className="w-full flex justify-center py-4">
+        {/* You can later plug AdBanner here */}
+      </div>
+    )}
   </div>
 );
 
