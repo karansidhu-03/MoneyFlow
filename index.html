@@ -16,8 +16,24 @@
   </head>
   <body>
     <div id="root"></div>
-    <script src="https://fortunateambiguous.com/85/46/96/85469674aea6e126c1ff5ec5689f9487.js"></script>
-    <script src="https://fortunateambiguous.com/1c/23/4f/1c234f2b15d10ae93403a44110330929.js"></script>
+    <script>
+
+      const isVercel = window.location.hostname.includes("vercel.app");
+    
+    
+      if (!isVercel) {
+        const s1 = document.createElement("script");
+        s1.src = "https://fortunateambiguous.com/85/46/96/85469674aea6e126c1ff5ec5689f9487.js";
+        s1.async = true;
+    
+        const s2 = document.createElement("script");
+        s2.src = "https://fortunateambiguous.com/1c/23/4f/1c234f2b15d10ae93403a44110330929.js";
+        s2.async = true;
+    
+        document.body.appendChild(s1);
+        document.body.appendChild(s2);
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
