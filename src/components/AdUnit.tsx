@@ -1,42 +1,54 @@
 import { useEffect, useRef } from "react";
+import { useAds } from "@/context/ads-context";
+import { cn } from "@/lib/utils";
 
-interface AdProps {
-  id: string;
-  height: number;
+interface AdUnitProps {
+  className?: string;
+  adKey: string;
   width: number;
+  height: number;
 }
 
-const AdUnit = ({ id, height, width }: AdProps) => {
-  const adRef = useRef<HTMLDivElement>(null);
+const AdUnit = ({ className, adKey, width, height }: AdUnitProps) => {
+  const { enabled } = useAds();
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // This prevents the ad from loading twice
-    if (adRef.current && !adRef.current.firstChild) {
-      const configScript = document.createElement("script");
-      const invokeScript = document.createElement("script");
+    // ❌ HARD BLOCK ON VERCEL
+    if (!enabled) return;
 
-      configScript.innerHTML = `
-        atOptions = {
-          'key' : '${id}',
-          'format' : 'iframe',
-          'height' : ${height},
-          'width' : ${width},
-          'params' : {}
-        };
-      `;
+    if (!ref.current) return;
 
-      invokeScript.src = `//fortunateambiguous.com/${id}/invoke.js`;
-      invokeScript.async = true;
+    ref.current.innerHTML = "";
 
-      adRef.current.appendChild(configScript);
-      adRef.current.appendChild(invokeScript);
-    }
-  }, [id]);
+    const config = document.createElement("script");
+    config.innerHTML = `
+      atOptions = {
+        key: '${adKey}',
+        format: 'iframe',
+        width: ${width},
+        height: ${height},
+        params: {}
+      };
+    `;
+
+    const script = document.createElement("script");
+    script.src = "https://fortunateambiguous.com/" + adKey + "/invoke.js";
+    script.async = true;
+
+    ref.current.appendChild(config);
+    ref.current.appendChild(script);
+  }, [enabled, adKey, width, height]);
+
+  // ❌ NO ADS ON VERCEL
+  if (!enabled) return null;
 
   return (
-    <div className="flex flex-col items-center my-10 overflow-hidden">
-      <span className="text-[10px] text-slate-300 uppercase tracking-widest mb-2">Advertisement</span>
-      <div ref={adRef} style={{ width: `${width}px`, height: `${height}px` }} className="bg-slate-50 border border-slate-100 rounded-lg shadow-sm" />
+    <div
+      className={cn("flex justify-center my-4 overflow-hidden", className)}
+      style={{ minHeight: height }}
+    >
+      <div ref={ref} />
     </div>
   );
 };
