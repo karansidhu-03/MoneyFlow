@@ -129,8 +129,7 @@ const MortgageCalculator = () => {
                         </p>
                       </div>
                     </div>
-              </div>
-            </div>
+           
 
             {/* RIGHT COLUMN: RESULTS */}
             <div className="space-y-6">
